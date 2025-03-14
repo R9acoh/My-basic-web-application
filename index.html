@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auto Marker Planning Software</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Auto Marker Planning Software</h1>
+            <h1><i class="fas fa-tasks"></i> Auto Marker Planning</h1>
             <p>Plan and visualize your marking strategy efficiently</p>
         </header>
         
@@ -18,11 +22,11 @@
                 <div class="section">
                     <h3>Project Details</h3>
                     <div class="input-group">
-                        <label for="projectName">Project Name:</label>
+                        <label for="projectName"><i class="fas fa-project-diagram"></i> Project Name</label>
                         <input type="text" id="projectName" placeholder="Enter project name">
                     </div>
                     <div class="input-group">
-                        <label for="projectDeadline">Deadline:</label>
+                        <label for="projectDeadline"><i class="fas fa-calendar-alt"></i> Deadline</label>
                         <input type="date" id="projectDeadline">
                     </div>
                 </div>
@@ -30,11 +34,11 @@
                 <div class="section">
                     <h3>Add New Marker</h3>
                     <div class="input-group">
-                        <label for="markerName">Marker Name:</label>
+                        <label for="markerName"><i class="fas fa-user"></i> Marker Name</label>
                         <input type="text" id="markerName" placeholder="Enter marker name">
                     </div>
                     <div class="input-group">
-                        <label for="markerExpertise">Expertise:</label>
+                        <label for="markerExpertise"><i class="fas fa-graduation-cap"></i> Expertise</label>
                         <select id="markerExpertise">
                             <option value="">Select expertise...</option>
                             <option value="math">Mathematics</option>
@@ -45,33 +49,46 @@
                         </select>
                     </div>
                     <div class="input-group">
-                        <label for="markingCapacity">Daily Capacity:</label>
+                        <label for="markingCapacity"><i class="fas fa-chart-line"></i> Daily Capacity</label>
                         <input type="number" id="markingCapacity" placeholder="Papers per day">
                     </div>
-                    <button id="addMarkerBtn">Add Marker</button>
+                    <button id="addMarkerBtn"><i class="fas fa-plus"></i> Add Marker</button>
                 </div>
                 
                 <div class="section">
                     <h3>Assignment Settings</h3>
                     <div class="input-group">
-                        <label for="totalPapers">Total Papers:</label>
+                        <label for="totalPapers"><i class="fas fa-file-alt"></i> Total Papers</label>
                         <input type="number" id="totalPapers" placeholder="Number of papers">
                     </div>
                     <div class="input-group">
-                        <label for="assignmentStrategy">Assignment Strategy:</label>
+                        <label for="assignmentStrategy"><i class="fas fa-random"></i> Assignment Strategy</label>
                         <select id="assignmentStrategy">
                             <option value="even">Distribute Evenly</option>
                             <option value="capacity">By Capacity</option>
                             <option value="expertise">By Expertise</option>
                         </select>
                     </div>
-                    <button id="assignBtn">Assign Papers</button>
+                    <button id="assignBtn"><i class="fas fa-magic"></i> Assign Papers</button>
                 </div>
             </div>
             
             <div class="content">
                 <div class="markers-container">
-                    <h2>Markers</h2>
+                    <div class="header-actions">
+                        <h2><i class="fas fa-users"></i> Markers</h2>
+                        <div class="actions">
+                            <button id="sortMarkersBtn" class="icon-btn tooltip">
+                                <i class="fas fa-sort"></i>
+                                <span class="tooltip-text">Sort markers</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="markerStats" class="stats-row">
+                        <!-- Marker stats will be added here dynamically -->
+                    </div>
+                    
                     <div id="markersList" class="markers-list">
                         <!-- Markers will be added here dynamically -->
                         <div class="empty-state">No markers added yet. Add markers from the sidebar.</div>
@@ -79,7 +96,25 @@
                 </div>
                 
                 <div class="planning-container">
-                    <h2>Assignment Plan</h2>
+                    <div class="header-actions">
+                        <h2><i class="fas fa-clipboard-check"></i> Assignment Plan</h2>
+                        <div class="actions">
+                            <button id="exportBtn" class="icon-btn tooltip">
+                                <i class="fas fa-file-export"></i>
+                                <span class="tooltip-text">Export plan</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="charts-container">
+                        <div id="distributionChart" class="chart">
+                            <canvas id="paperDistribution"></canvas>
+                        </div>
+                        <div id="timelineChart" class="chart">
+                            <canvas id="completionTimeline"></canvas>
+                        </div>
+                    </div>
+                    
                     <div id="assignmentPlan" class="assignment-plan">
                         <!-- Assignment plan will be displayed here -->
                         <div class="empty-state">Generate an assignment plan by adding markers and clicking "Assign Papers".</div>
@@ -89,8 +124,30 @@
         </div>
         
         <footer>
-            <p>Auto Marker Planning Software | <span id="currentYear"></span></p>
+            <p><i class="fas fa-code"></i> Auto Marker Planning Software | <span id="currentYear"></span></p>
+            <div class="footer-links">
+                <a href="#" id="aboutLink">About</a> •
+                <a href="#" id="helpLink">Help</a> •
+                <a href="#" id="saveLink">Save Project</a>
+            </div>
         </footer>
+        
+        <!-- Modal for help content -->
+        <div id="helpModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2>How to Use This Tool</h2>
+                <div class="modal-body">
+                    <p>This Auto Marker Planning Software helps distribute marking workload among multiple markers.</p>
+                    <ol>
+                        <li>Enter your project name and deadline.</li>
+                        <li>Add markers with their expertise and daily capacity.</li>
+                        <li>Enter the total number of papers to be marked.</li>
+                        <li>Select an assignment strategy and click "Assign Papers".</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
     </div>
     
     <script src="app.js"></script>
