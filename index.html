@@ -3,14 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Basic Web App</title>
+    <title>Auto Marker Planning Software</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to My Basic Web App</h1>
-        <p>This is a simple web application ready for hosting.</p>
-        <button id="colorButton">Change Background</button>
+        <header>
+            <h1>Auto Marker Planning Software</h1>
+            <p>Plan and visualize your marking strategy efficiently</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="section">
+                    <h3>Project Details</h3>
+                    <div class="input-group">
+                        <label for="projectName">Project Name:</label>
+                        <input type="text" id="projectName" placeholder="Enter project name">
+                    </div>
+                    <div class="input-group">
+                        <label for="projectDeadline">Deadline:</label>
+                        <input type="date" id="projectDeadline">
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h3>Add New Marker</h3>
+                    <div class="input-group">
+                        <label for="markerName">Marker Name:</label>
+                        <input type="text" id="markerName" placeholder="Enter marker name">
+                    </div>
+                    <div class="input-group">
+                        <label for="markerExpertise">Expertise:</label>
+                        <select id="markerExpertise">
+                            <option value="">Select expertise...</option>
+                            <option value="math">Mathematics</option>
+                            <option value="science">Science</option>
+                            <option value="english">English</option>
+                            <option value="history">History</option>
+                            <option value="programming">Programming</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="markingCapacity">Daily Capacity:</label>
+                        <input type="number" id="markingCapacity" placeholder="Papers per day">
+                    </div>
+                    <button id="addMarkerBtn">Add Marker</button>
+                </div>
+                
+                <div class="section">
+                    <h3>Assignment Settings</h3>
+                    <div class="input-group">
+                        <label for="totalPapers">Total Papers:</label>
+                        <input type="number" id="totalPapers" placeholder="Number of papers">
+                    </div>
+                    <div class="input-group">
+                        <label for="assignmentStrategy">Assignment Strategy:</label>
+                        <select id="assignmentStrategy">
+                            <option value="even">Distribute Evenly</option>
+                            <option value="capacity">By Capacity</option>
+                            <option value="expertise">By Expertise</option>
+                        </select>
+                    </div>
+                    <button id="assignBtn">Assign Papers</button>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="markers-container">
+                    <h2>Markers</h2>
+                    <div id="markersList" class="markers-list">
+                        <!-- Markers will be added here dynamically -->
+                        <div class="empty-state">No markers added yet. Add markers from the sidebar.</div>
+                    </div>
+                </div>
+                
+                <div class="planning-container">
+                    <h2>Assignment Plan</h2>
+                    <div id="assignmentPlan" class="assignment-plan">
+                        <!-- Assignment plan will be displayed here -->
+                        <div class="empty-state">Generate an assignment plan by adding markers and clicking "Assign Papers".</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Auto Marker Planning Software | <span id="currentYear"></span></p>
+        </footer>
     </div>
     
     <script src="app.js"></script>

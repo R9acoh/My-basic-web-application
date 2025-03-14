@@ -1,16 +1,43 @@
-# My Basic Web App
+# Auto Marker Planning Software
 
-A simple web application that changes background color when a button is clicked.
+A web application for planning and distributing marking workload among multiple markers.
+
+## Features
+
+- Create marking projects with deadlines
+- Add markers with different expertise areas and daily capacity
+- Distribute papers to markers using different assignment strategies:
+  - Even distribution
+  - Distribution based on marker capacity
+  - Distribution based on expertise (foundation for future enhancement)
+- Visualize the assignment plan with completion estimates
 
 ## Project Structure
 
-- `index.html` - Main HTML file
-- `styles.css` - CSS styles for the application
-- `app.js` - JavaScript functionality
+- `index.html` - Main application structure and UI
+- `styles.css` - Styling for the application
+- `app.js` - Application logic and functionality
+
+## How to Use
+
+1. Enter your project name and deadline
+2. Add markers with their names, area of expertise, and daily marking capacity
+3. Enter the total number of papers to be marked
+4. Select an assignment strategy
+5. Click "Assign Papers" to generate the assignment plan
+6. View the distribution and time estimates for each marker
+
+## Future Backend Integration
+
+This front-end application is designed to be easily integrated with a backend system. The JavaScript code already prepares structured data objects that can be sent to a backend API:
+
+- Project details
+- Marker information
+- Assignment plans
 
 ## Hosting on GitHub Pages
 
-Follow these steps to host your web application on GitHub Pages:
+Follow these steps to host your application on GitHub Pages:
 
 ### 1. Create a GitHub Account
 
@@ -19,7 +46,7 @@ If you don't already have one, sign up for a GitHub account at [github.com](http
 ### 2. Create a New Repository
 
 1. Click the "+" icon in the top right corner of GitHub and select "New repository"
-2. Name your repository (e.g., "my-basic-web-app")
+2. Name your repository (e.g., "auto-marker-planning")
 3. Add a description (optional)
 4. Leave it as a Public repository
 5. Click "Create repository"
@@ -65,18 +92,4 @@ git push -u origin main
 4. Under "Source", select "main" branch
 5. Click "Save"
 6. Wait a few minutes for GitHub to build your site
-7. GitHub will provide you with a URL where your site is published (usually https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/)
-
-### 5. Access Your Live Website
-
-After GitHub Pages is enabled, your web app will be available at:
-`https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/`
-
-## Making Updates
-
-Any time you push changes to your GitHub repository, the live site will automatically update.
-
-## Additional Resources
-
-- [GitHub Pages Documentation](https://docs.github.com/en/pages)
-- [GitHub Guides](https://guides.github.com/)
+7. GitHub will provide you with a URL where your site is published
